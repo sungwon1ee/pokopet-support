@@ -82,7 +82,7 @@ export const COPY: Record<Lang, Copy> = {
         { heading: '문의', body: [`개인정보처리방침에 대한 문의는 ${emailLink} 으로 연락 주세요.`] },
       ],
     },
-    footer: '데스크톱 위의 작은 친구',
+    footer: 'Sungwon Lee / @malang.lab',
   },
 
   en: {
@@ -134,7 +134,7 @@ export const COPY: Record<Lang, Copy> = {
         { heading: 'Contact', body: [`For any questions about this Privacy Policy, contact ${emailLink}.`] },
       ],
     },
-    footer: 'A little friend on your desktop',
+    footer: 'Sungwon Lee / @malang.lab',
   },
 
   ja: {
@@ -186,6 +186,6 @@ export const COPY: Record<Lang, Copy> = {
         { heading: 'お問い合わせ', body: [`本プライバシーポリシーに関するお問い合わせは ${emailLink} までご連絡ください。`] },
       ],
     },
-    footer: 'デスクトップの上の小さな友だち',
+    footer: 'Sungwon Lee / @malang.lab',
   },
 };
