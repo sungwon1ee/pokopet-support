@@ -34,10 +34,10 @@ const emailLink = `[${EMAIL}](mailto:${EMAIL})`;
 
 export const COPY: Record<Lang, Copy> = {
   ko: {
-    tagline: '내 데스크톱 위의 작은 친구',
+    tagline: '내 Mac에 머무는 작은 펫',
     appStore: { small: 'Mac App Store', soon: '출시 예정', download: '다운로드' },
     intro: {
-      title: 'pokoPet이란? 🐾',
+      title: 'pokoPet이란?',
       lead: '화면 위를 돌아다니고, 창을 기어오르고, 당신에게 반응하는 귀여운 macOS 데스크톱 펫이에요. 일하는 동안 곁을 지켜주는 작은 친구를 만나보세요.',
       pets: [
         { img: 'assets/cat.png', name: '고양이', desc: '장난감을 좋아하는 친절한 고양이. 하지만 언제 펀치를 날릴지 몰라요.' },
@@ -48,12 +48,12 @@ export const COPY: Record<Lang, Copy> = {
     features: {
       title: '주요 기능',
       items: [
-        { icon: '🎬', title: '살아있는 움직임', desc: '걷고, 뛰고, 폴짝 뛰고, 창을 기어오르고, 공을 쫓아다녀요.' },
-        { icon: '✋', title: '같이 놀기', desc: '드래그해서 옮기면 반응하고, 클릭하면 귀여운 리액션을 보여줘요.' },
-        { icon: '🎒', title: '아이템 & 꾸미기', desc: '먹이를 주고 아이템을 착용시켜 나만의 펫으로 꾸며보세요.' },
+        { icon: '✨', title: '살아있는 움직임', desc: '걷고, 뛰고, 폴짝 뛰고, 창을 기어오르고, 공을 쫓아다녀요.' },
+        { icon: '🧶', title: '같이 놀기', desc: '드래그해서 옮기면 반응하고, 클릭하면 귀여운 리액션을 보여줘요.' },
+        { icon: '🎀', title: '아이템 & 꾸미기', desc: '먹이를 주고 아이템을 착용시켜 나만의 펫으로 꾸며보세요.' },
         { icon: '⚙️', title: '내 맘대로 설정', desc: '메뉴바 아이콘으로 크기(60~120%)와 표시 여부를 간편하게 조절해요.' },
         { icon: '🔒', title: '완전한 프라이버시', desc: '모든 동작이 기기 안에서만 이뤄져요. 수집·전송하는 데이터가 없어요.' },
-        { icon: '💻', title: '가볍고 자연스럽게', desc: '작업을 방해하지 않고 데스크톱 위에서 자연스럽게 함께해요.' },
+        { icon: '🪶', title: '가볍고 자연스럽게', desc: '작업을 방해하지 않고 데스크톱 위에서 자연스럽게 함께해요.' },
       ],
     },
     support: {
@@ -82,14 +82,14 @@ export const COPY: Record<Lang, Copy> = {
         { heading: '문의', body: [`개인정보처리방침에 대한 문의는 ${emailLink} 으로 연락 주세요.`] },
       ],
     },
-    footer: '🐾 데스크톱 위의 작은 친구',
+    footer: '데스크톱 위의 작은 친구',
   },
 
   en: {
-    tagline: 'A little friend on your desktop',
+    tagline: 'A tiny pet for your Mac',
     appStore: { small: 'Mac App Store', soon: 'Coming Soon', download: 'Download' },
     intro: {
-      title: 'What is pokoPet? 🐾',
+      title: 'What is pokoPet?',
       lead: 'A cute macOS desktop pet that wanders across your screen, climbs your windows, and reacts to you. Meet a little companion that keeps you company while you work.',
       pets: [
         { img: 'assets/cat.png', name: 'Cat', desc: 'A friendly cat who loves toys — but you never know when a punch might fly.' },
@@ -100,12 +100,12 @@ export const COPY: Record<Lang, Copy> = {
     features: {
       title: 'Highlights',
       items: [
-        { icon: '🎬', title: 'Lively movement', desc: 'Walks, runs, hops, climbs your windows, and chases a ball.' },
-        { icon: '✋', title: 'Play together', desc: 'Drag it around and it reacts; click it for cute little reactions.' },
-        { icon: '🎒', title: 'Items & dress-up', desc: 'Feed your pet and equip items to make it your own.' },
+        { icon: '✨', title: 'Lively movement', desc: 'Walks, runs, hops, climbs your windows, and chases a ball.' },
+        { icon: '🧶', title: 'Play together', desc: 'Drag it around and it reacts; click it for cute little reactions.' },
+        { icon: '🎀', title: 'Items & dress-up', desc: 'Feed your pet and equip items to make it your own.' },
         { icon: '⚙️', title: 'Make it yours', desc: 'Resize (60–120%) and toggle visibility right from the menu bar icon.' },
         { icon: '🔒', title: 'Fully private', desc: 'Everything runs on-device. No data is collected or sent anywhere.' },
-        { icon: '💻', title: 'Light & natural', desc: 'Lives on your desktop without getting in the way of your work.' },
+        { icon: '🪶', title: 'Light & natural', desc: 'Lives on your desktop without getting in the way of your work.' },
       ],
     },
     support: {
@@ -134,14 +134,14 @@ export const COPY: Record<Lang, Copy> = {
         { heading: 'Contact', body: [`For any questions about this Privacy Policy, contact ${emailLink}.`] },
       ],
     },
-    footer: '🐾 A little friend on your desktop',
+    footer: 'A little friend on your desktop',
   },
 
   ja: {
-    tagline: 'デスクトップの上の小さな友だち',
+    tagline: 'Macに住む小さなペット',
     appStore: { small: 'Mac App Store', soon: '近日公開', download: 'ダウンロード' },
     intro: {
-      title: 'pokoPetとは？ 🐾',
+      title: 'pokoPetとは？',
       lead: '画面の上を歩き回り、ウィンドウをよじ登り、あなたに反応するかわいいmacOSデスクトップペット。作業のあいだ、そばに寄り添う小さな友だちに出会いましょう。',
       pets: [
         { img: 'assets/cat.png', name: 'ネコ', desc: 'おもちゃが好きなやさしいネコ。でも、いつパンチが飛んでくるかは分かりません。' },
@@ -152,12 +152,12 @@ export const COPY: Record<Lang, Copy> = {
     features: {
       title: '主な機能',
       items: [
-        { icon: '🎬', title: 'いきいきとした動き', desc: '歩く、走る、跳ねる、ウィンドウを登る、ボールを追いかける。' },
-        { icon: '✋', title: '一緒に遊ぶ', desc: 'ドラッグして動かすと反応し、クリックするとかわいいリアクション。' },
-        { icon: '🎒', title: 'アイテム & きせかえ', desc: 'エサをあげたりアイテムを持たせて、自分だけのペットに。' },
+        { icon: '✨', title: 'いきいきとした動き', desc: '歩く、走る、跳ねる、ウィンドウを登る、ボールを追いかける。' },
+        { icon: '🧶', title: '一緒に遊ぶ', desc: 'ドラッグして動かすと反応し、クリックするとかわいいリアクション。' },
+        { icon: '🎀', title: 'アイテム & きせかえ', desc: 'エサをあげたりアイテムを持たせて、自分だけのペットに。' },
         { icon: '⚙️', title: '自由に設定', desc: 'メニューバーのアイコンからサイズ（60〜120%）や表示を調整。' },
         { icon: '🔒', title: '完全なプライバシー', desc: 'すべて端末内で動作。収集・送信するデータはありません。' },
-        { icon: '💻', title: '軽くて自然', desc: '作業のじゃまをせず、デスクトップの上で自然に一緒に過ごします。' },
+        { icon: '🪶', title: '軽くて自然', desc: '作業のじゃまをせず、デスクトップの上で自然に一緒に過ごします。' },
       ],
     },
     support: {
@@ -186,6 +186,6 @@ export const COPY: Record<Lang, Copy> = {
         { heading: 'お問い合わせ', body: [`本プライバシーポリシーに関するお問い合わせは ${emailLink} までご連絡ください。`] },
       ],
     },
-    footer: '🐾 デスクトップの上の小さな友だち',
+    footer: 'デスクトップの上の小さな友だち',
   },
 };

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { useCopy } from '../LangProvider';
 import { asset, EMAIL } from '../i18n';
 import Rich from './Rich';
+import Paw from './Paw';
 
 function Card({ children }: { children: ReactNode }) {
   return <section className="card">{children}</section>;
@@ -11,7 +12,9 @@ export function Intro() {
   const { intro } = useCopy();
   return (
     <Card>
-      <h2>{intro.title}</h2>
+      <h2>
+        {intro.title} <Paw className="paw-accent" />
+      </h2>
       <p className="lead">{intro.lead}</p>
       <div className="pets">
         {intro.pets.map((pet) => (
@@ -99,8 +102,8 @@ export function Footer() {
   const { footer } = useCopy();
   return (
     <footer>
-      {footer}
-      <br />© 2026 pokoPet. All rights reserved.
+      <Paw /> {footer}
+      <br />© 2026 Sungwon Lee. All rights reserved.
     </footer>
   );
 }

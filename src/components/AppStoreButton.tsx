@@ -13,23 +13,20 @@ export default function AppStoreButton() {
   const live = APP_STORE_URL.length > 0;
 
   return (
-    <>
-      <a
-        className={`appstore-btn${live ? '' : ' coming-soon'}`}
-        href={live ? APP_STORE_URL : '#'}
-        {...(live
-          ? { target: '_blank', rel: 'noreferrer' }
-          : { 'aria-disabled': true, onClick: (e: React.MouseEvent) => e.preventDefault() })}
-      >
-        <svg viewBox="0 0 384 512" aria-hidden="true">
-          <path d={APPLE_LOGO} />
-        </svg>
-        <span className="lbl">
-          <small>{appStore.small}</small>
-          <strong>{live ? appStore.download : appStore.soon}</strong>
-        </span>
-      </a>
-      {!live && <span className="soon-chip">COMING SOON</span>}
-    </>
+    <a
+      className={`appstore-btn${live ? '' : ' coming-soon'}`}
+      href={live ? APP_STORE_URL : '#'}
+      {...(live
+        ? { target: '_blank', rel: 'noreferrer' }
+        : { 'aria-disabled': true, onClick: (e: React.MouseEvent) => e.preventDefault() })}
+    >
+      <svg viewBox="0 0 384 512" aria-hidden="true">
+        <path d={APPLE_LOGO} />
+      </svg>
+      <span className="lbl">
+        <small>{appStore.small}</small>
+        <strong>{live ? appStore.download : appStore.soon}</strong>
+      </span>
+    </a>
   );
 }

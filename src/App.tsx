@@ -1,15 +1,22 @@
+import { useLang } from './LangProvider';
+import LangToggle from './components/LangToggle';
 import Hero from './components/Hero';
 import { Intro, Features, Support, Privacy, Footer } from './components/Sections';
 
 export default function App() {
+  const { lang } = useLang();
   return (
-    <div className="wrap">
-      <Hero />
-      <Intro />
-      <Features />
-      <Support />
-      <Privacy />
-      <Footer />
-    </div>
+    <>
+      <LangToggle />
+      {/* keyed by lang so the whole page re-runs its fade-in on each switch */}
+      <div className="wrap" key={lang}>
+        <Hero />
+        <Intro />
+        <Features />
+        <Support />
+        <Privacy />
+        <Footer />
+      </div>
+    </>
   );
 }
