@@ -1,18 +1,45 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { asset } from '../i18n';
 
-const prefersReducedMotion = () =>
+const reduceMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
+/*
+ * iOS autoplay is allowed for muted+inline video EXCEPT in Low Power Mode or
+ * when Safari's per-site setting is "Never Auto-Play" — there, muted autoplay
+ * is refused until the first user gesture. But a single gesture *anywhere*
+ * unlocks playback for the whole page. So we keep a shared registry of clips
+ * and, on the first touch/tap/scroll, kick off every one that's on screen —
+ * no per-video play button required.
+ */
+const clips = new Set<HTMLVideoElement>();
+let armed = false;
+
+const GESTURES = ['touchstart', 'pointerdown', 'click', 'keydown'];
+
+function playIfVisible(v: HTMLVideoElement) {
+  const r = v.getBoundingClientRect();
+  if (r.bottom > 0 && r.top < (window.innerHeight || document.documentElement.clientHeight)) {
+    v.muted = true;
+    v.play().catch(() => {});
+  }
+}
+
+function armFirstGesture() {
+  if (armed || typeof window === 'undefined') return;
+  armed = true;
+  const fire = () => {
+    clips.forEach(playIfVisible);
+    GESTURES.forEach((e) => window.removeEventListener(e, fire));
+  };
+  GESTURES.forEach((e) => window.addEventListener(e, fire, { passive: true }));
+}
+
 /**
- * A muted, looping clip that plays while it's on screen — so we never download
- * or decode video the visitor can't see (kind to mobile data/battery).
- *
- * Mobile autoplay is fussy: iOS only allows it when the element is *actually*
- * muted + playsinline, and refuses entirely in Low Power Mode. React's `muted`
- * prop doesn't always stick, so we force the property on the DOM node, and if
- * play() is still rejected we reveal a tap-to-play button as a fallback.
+ * Muted, looping clip that plays while on screen. Tries to autoplay right away
+ * (works on desktop and default mobile Safari); if the browser blocks it, the
+ * visitor's first interaction with the page starts it — see the note above.
  */
 export function AutoVideo({
   src,
@@ -26,56 +53,46 @@ export function AutoVideo({
   className?: string;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
-  const [needsTap, setNeedsTap] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     el.muted = true; // iOS checks the muted *property*, not just the attribute
-    if (prefersReducedMotion()) return;
+    if (reduceMotion()) return;
 
-    const tryPlay = () => {
-      el.preload = 'auto';
-      el.muted = true;
-      const p = el.play();
-      if (p)
-        p.then(() => setNeedsTap(false)).catch(() => setNeedsTap(true));
-    };
+    clips.add(el);
+    armFirstGesture();
+
     const io = new IntersectionObserver(
-      ([e]) => (e.isIntersecting ? tryPlay() : el.pause()),
+      ([e]) => {
+        if (e.isIntersecting) {
+          el.muted = true;
+          el.preload = 'auto';
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
+      },
       { threshold: 0.25 },
     );
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      clips.delete(el);
+    };
   }, []);
 
-  const onTap = () => {
-    const el = ref.current;
-    if (!el) return;
-    el.muted = true;
-    el.play().then(() => setNeedsTap(false)).catch(() => {});
-  };
-
   return (
-    <>
-      <video
-        ref={ref}
-        className={className}
-        poster={asset(poster)}
-        src={asset(src)}
-        muted
-        loop
-        playsInline
-        preload="none"
-        aria-label={alt}
-      />
-      {needsTap && (
-        <button className="tap-play" onClick={onTap} aria-label={alt}>
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M8 5v14l11-7z" />
-          </svg>
-        </button>
-      )}
-    </>
+    <video
+      ref={ref}
+      className={className}
+      poster={asset(poster)}
+      src={asset(src)}
+      muted
+      loop
+      playsInline
+      preload="none"
+      aria-label={alt}
+    />
   );
 }
