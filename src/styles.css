@@ -6,9 +6,9 @@
   --accent-ink: #0a5fbf;
   --accent-soft: rgba(11, 107, 214, 0.12);
   --hairline: rgba(0, 0, 0, 0.06);
-  /* Translucent glass — thick material with a bright specular top edge */
-  --glass: rgba(255, 255, 255, 0.52);
-  --glass-2: rgba(255, 255, 255, 0.40);
+  /* Translucent glass — thin enough that the candy background tints through */
+  --glass: rgba(255, 255, 255, 0.42);
+  --glass-2: rgba(255, 255, 255, 0.32);
   --glass-brd: rgba(255, 255, 255, 0.70);
   /* Layered shadows: contact + ambient + soft cast — reads more premium than one blur */
   --edge: inset 0 1px 0 rgba(255, 255, 255, 0.72), inset 0 0 0 0.5px rgba(255, 255, 255, 0.28);
@@ -28,17 +28,18 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* soft, airy "desktop wallpaper" — gives the glass something luminous to blur */
+  /* colorful "desktop wallpaper" — vivid candy blobs the frosted glass picks up */
   background:
-    radial-gradient(46vw 46vw at 12% -8%, rgba(198, 218, 255, 0.75) 0%, rgba(198,218,255,0) 60%),
-    radial-gradient(42vw 42vw at 100% 4%, rgba(255, 220, 238, 0.62) 0%, rgba(255,220,238,0) 58%),
-    radial-gradient(56vw 52vw at 90% 100%, rgba(206, 244, 235, 0.62) 0%, rgba(206,244,235,0) 58%),
-    radial-gradient(54vw 54vw at 2% 106%, rgba(226, 219, 252, 0.6) 0%, rgba(226,219,252,0) 58%),
-    linear-gradient(180deg, #f1f4fb 0%, #e9eef7 100%);
+    radial-gradient(42vw 40vw at 16% -4%, rgba(150, 186, 255, 0.92) 0%, rgba(150,186,255,0) 60%),
+    radial-gradient(40vw 40vw at 102% 6%, rgba(255, 176, 214, 0.88) 0%, rgba(255,176,214,0) 60%),
+    radial-gradient(46vw 46vw at 96% 100%, rgba(150, 232, 210, 0.85) 0%, rgba(150,232,210,0) 60%),
+    radial-gradient(46vw 50vw at -4% 104%, rgba(197, 178, 255, 0.88) 0%, rgba(197,178,255,0) 60%),
+    radial-gradient(34vw 30vw at 60% 42%, rgba(255, 224, 178, 0.55) 0%, rgba(255,224,178,0) 55%),
+    linear-gradient(180deg, #eef2fc 0%, #e7edf8 100%);
   background-attachment: fixed;
 }
 .wrap {
-  max-width: 760px; margin: 0 auto; padding: 44px 20px 76px;
+  max-width: 600px; margin: 0 auto; padding: 44px 20px 76px;
   animation: pageIn 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 @keyframes pageIn {
@@ -176,10 +177,8 @@ strong { font-weight: 600; }
 /* ---------- Hero showcase clip (all three pets together) ---------- */
 .hero-clip {
   position: relative;
-  margin: 28px auto 0; overflow: hidden;
-  /* cap the width: the source is ~1006px, so a smaller frame stays crisp */
-  max-width: 480px; width: 100%;
-  border-radius: var(--r-tile); aspect-ratio: 16 / 10; background: #cfe0ff;
+  margin: 28px auto 0; overflow: hidden; width: 100%;
+  border-radius: var(--r); aspect-ratio: 16 / 10; background: #cfe0ff;
   border: 0.5px solid var(--glass-brd);
   box-shadow: var(--shadow), var(--edge);
 }
