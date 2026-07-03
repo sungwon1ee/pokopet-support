@@ -19,9 +19,6 @@ export interface Faq { q: string; a: string; }
 export interface PrivacyBlock { heading: string; body: string[]; list?: string[]; }
 export interface UsageStep { title: string; desc: string; }
 
-/** Page-1 "intro" clip — all three pets together (used in the showcase band). */
-export const INTRO_CLIP = { video: 'assets/video/intro.mp4', poster: 'assets/poster/intro.jpg' };
-
 /** The in-app usage guide's how-to pages, in order (poster + video paths). */
 export const USAGE_CLIPS = [
   { video: 'assets/video/use-pets.mp4', poster: 'assets/poster/use-pets.jpg' },

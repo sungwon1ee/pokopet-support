@@ -173,16 +173,6 @@ strong { font-weight: 600; }
 .pet .name { display: block; margin-top: 12px; font-weight: 700; font-size: 15.5px; letter-spacing: -0.01em; }
 .pet .desc { display: block; margin-top: 5px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
 
-/* ---------- Hero showcase clip (all three pets together) ---------- */
-.hero-clip {
-  position: relative;
-  width: 100%; margin: 30px auto 0; overflow: hidden;
-  border-radius: var(--r); aspect-ratio: 16 / 10; background: #cfe0ff;
-  border: 0.5px solid var(--glass-brd);
-  box-shadow: var(--shadow), var(--edge);
-}
-
-
 /* ---------- Usage walkthrough ---------- */
 .steps { display: grid; gap: 18px; margin-top: 6px; }
 .step { display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; align-items: center; }
@@ -213,7 +203,6 @@ footer a { color: var(--muted); }
 @media (max-width: 560px) {
   .card { padding: 24px 18px; }
   .hero { margin-bottom: 26px; }
-  .hero-clip { margin-top: 22px; }
   .pets { grid-template-columns: 1fr; }
   .pet { display: flex; align-items: center; gap: 16px; text-align: left; }
   .pet-img { flex: none; margin: 0; }
