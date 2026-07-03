@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useCopy } from '../LangProvider';
-import { asset, EMAIL } from '../i18n';
+import { asset, EMAIL, USAGE_CLIPS, INTRO_CLIP } from '../i18n';
+import { AutoVideo } from './Media';
 import Rich from './Rich';
 import Paw from './Paw';
 
@@ -19,9 +20,11 @@ export function Intro() {
       <div className="pets">
         {intro.pets.map((pet) => (
           <div className="pet" key={pet.name}>
-            <img src={asset(pet.img)} alt={pet.name} />
-            <span className="name">{pet.name}</span>
-            <span className="desc">{pet.desc}</span>
+            <img className="pet-img" src={asset(pet.img)} alt={pet.name} />
+            <div className="pet-txt">
+              <span className="name">{pet.name}</span>
+              <span className="desc">{pet.desc}</span>
+            </div>
           </div>
         ))}
       </div>
@@ -29,21 +32,46 @@ export function Intro() {
   );
 }
 
-export function Features() {
-  const { features } = useCopy();
+export function Showcase() {
+  const { showcase } = useCopy();
   return (
     <Card>
-      <h2>{features.title}</h2>
-      <div className="features">
-        {features.items.map((f) => (
-          <div className="feature" key={f.title}>
-            <div className="ico">{f.icon}</div>
-            <div>
-              <h4>{f.title}</h4>
-              <p>{f.desc}</p>
+      <h2>{showcase.title}</h2>
+      <p className="lead">{showcase.sub}</p>
+      <div className="showcase-clip">
+        <AutoVideo
+          src={INTRO_CLIP.video}
+          poster={INTRO_CLIP.poster}
+          alt={showcase.title}
+          className="clip-vid"
+        />
+      </div>
+    </Card>
+  );
+}
+
+export function Usage() {
+  const { usage } = useCopy();
+  return (
+    <Card>
+      <h2>{usage.title}</h2>
+      <p className="lead">{usage.sub}</p>
+      <div className="steps">
+        {usage.steps.map((step, i) => {
+          const clip = USAGE_CLIPS[i];
+          return (
+            <div className="step" key={step.title}>
+              <div className="clip">
+                <AutoVideo src={clip.video} poster={clip.poster} alt={step.title} className="clip-vid" />
+              </div>
+              <div className="step-txt">
+                <span className="step-no">{i + 1}</span>
+                <h4>{step.title}</h4>
+                <p>{step.desc}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </Card>
   );

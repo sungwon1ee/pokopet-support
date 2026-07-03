@@ -15,15 +15,27 @@ export const APP_STORE_URL = '';
 export const asset = (p: string) => import.meta.env.BASE_URL + p;
 
 export interface Pet { img: string; name: string; desc: string; }
-export interface Feature { icon: string; title: string; desc: string; }
 export interface Faq { q: string; a: string; }
 export interface PrivacyBlock { heading: string; body: string[]; list?: string[]; }
+export interface UsageStep { title: string; desc: string; }
+
+/** Page-1 "intro" clip — all three pets together (used in the showcase band). */
+export const INTRO_CLIP = { video: 'assets/video/intro.mp4', poster: 'assets/poster/intro.jpg' };
+
+/** The in-app usage guide's how-to pages, in order (poster + video paths). */
+export const USAGE_CLIPS = [
+  { video: 'assets/video/use-pets.mp4', poster: 'assets/poster/use-pets.jpg' },
+  { video: 'assets/video/use-windows.mp4', poster: 'assets/poster/use-windows.jpg' },
+  { video: 'assets/video/use-sit.mp4', poster: 'assets/poster/use-sit.jpg' },
+  { video: 'assets/video/use-items.mp4', poster: 'assets/poster/use-items.jpg' },
+];
 
 export interface Copy {
   tagline: string;
   appStore: { small: string; soon: string; download: string };
   intro: { title: string; lead: string; pets: Pet[] };
-  features: { title: string; items: Feature[] };
+  showcase: { title: string; sub: string };
+  usage: { title: string; sub: string; steps: UsageStep[] };
   support: { title: string; intro: string; faqTitle: string; faqs: Faq[] };
   privacy: { title: string; updated: string; intro: string; blocks: PrivacyBlock[] };
   footer: string;
@@ -45,15 +57,18 @@ export const COPY: Record<Lang, Copy> = {
         { img: 'assets/otter.png', name: '해달', desc: '온순하고 귀여운 해달. 세상에서 조개껍데기를 가장 좋아해요.' },
       ],
     },
-    features: {
-      title: '주요 기능',
-      items: [
-        { icon: '✨', title: '살아있는 움직임', desc: '걷고, 뛰고, 폴짝 뛰고, 창을 기어오르고, 공을 쫓아다녀요.' },
-        { icon: '🧶', title: '같이 놀기', desc: '드래그해서 옮기면 반응하고, 클릭하면 귀여운 리액션을 보여줘요.' },
-        { icon: '🎀', title: '아이템 & 꾸미기', desc: '먹이를 주고 아이템을 착용시켜 나만의 펫으로 꾸며보세요.' },
-        { icon: '⚙️', title: '내 맘대로 설정', desc: '메뉴바 아이콘으로 크기(60~120%)와 표시 여부를 간편하게 조절해요.' },
-        { icon: '🔒', title: '완전한 프라이버시', desc: '모든 동작이 기기 안에서만 이뤄져요. 수집·전송하는 데이터가 없어요.' },
-        { icon: '🪶', title: '가볍고 자연스럽게', desc: '작업을 방해하지 않고 데스크톱 위에서 자연스럽게 함께해요.' },
+    showcase: {
+      title: '내 Mac에 살짝 머무는 작은 친구',
+      sub: 'pokoPet은 내 Mac 위를 돌아다니는 작은 친구예요. Mac에서 보내는 순간을 조금 더 따뜻하고 편안하게 만들어줘요.',
+    },
+    usage: {
+      title: '이렇게 사용해요',
+      sub: 'pokoPet 빠르게 둘러보기',
+      steps: [
+        { title: '원하는 펫 고르기', desc: '각 펫은 서로 다른 움직임과 습관을 가지고 있어요. 메뉴에서 펫을 선택하면 작업 중인 화면 옆에 자연스럽게 나타나요. 다시 보관하고 싶을 땐 선택된 펫을 한 번 더 클릭하면 돼요.' },
+        { title: '윈도우 위를 걸어 다니기', desc: '화면에 떠 있는 윈도우 중 가장 앞에 있는 창과 상호작용할 수 있어요. 펫은 윈도우의 가장 윗부분을 땅처럼 인식하고 그 위를 걸어 다녀요.' },
+        { title: '윈도우 위에 펫 앉혀두기', desc: '펫을 더블클릭하면 그 자리에 앉힐 수 있어요. 한번 앉은 펫은 다시 드래그하거나 클릭하기 전까지 창 위에 고정된 채로 가만히 머물러요.' },
+        { title: '아이템을 놓고 반응을 지켜보기', desc: '상태바 메뉴에서 작은 아이템들을 꺼낼 수 있어요. 펫은 아이템을 쫓아가거나, 차거나, 살펴보고, 때로는 손에 들고 다니기도 해요. 아이템은 선택 창의 회수 버튼으로 다시 보관할 수 있어요.' },
       ],
     },
     support: {
@@ -97,15 +112,18 @@ export const COPY: Record<Lang, Copy> = {
         { img: 'assets/otter.png', name: 'Sea Otter', desc: 'A gentle, adorable sea otter that loves sea shells most of all.' },
       ],
     },
-    features: {
-      title: 'Highlights',
-      items: [
-        { icon: '✨', title: 'Lively movement', desc: 'Walks, runs, hops, climbs your windows, and chases a ball.' },
-        { icon: '🧶', title: 'Play together', desc: 'Drag it around and it reacts; click it for cute little reactions.' },
-        { icon: '🎀', title: 'Items & dress-up', desc: 'Feed your pet and equip items to make it your own.' },
-        { icon: '⚙️', title: 'Make it yours', desc: 'Resize (60–120%) and toggle visibility right from the menu bar icon.' },
-        { icon: '🔒', title: 'Fully private', desc: 'Everything runs on-device. No data is collected or sent anywhere.' },
-        { icon: '🪶', title: 'Light & natural', desc: 'Lives on your desktop without getting in the way of your work.' },
+    showcase: {
+      title: 'A tiny friend who stays with your Mac',
+      sub: 'pokoPet is a small friend who wanders around your Mac, making everyday moments feel a little warmer and calmer.',
+    },
+    usage: {
+      title: 'How to use',
+      sub: 'A quick tour of pokoPet',
+      steps: [
+        { title: 'Choose the pet you want', desc: 'Each pet has different movements and habits. Pick one from the menu and it will appear naturally beside your workspace. To put it away, click the selected pet once more.' },
+        { title: 'Walk along your open windows', desc: 'pokoPet can interact with the frontmost window on your screen. It treats the top edge of that window like ground and walks across it.' },
+        { title: 'Sit your pet on a window', desc: 'Double-click your pet to sit it down right there. Once seated, it stays put on the window, holding its spot until you drag or click it again.' },
+        { title: 'Drop in toys and watch them react', desc: 'Bring out small items from the status bar menu. Pets can chase them, kick them, inspect them, or even carry them around.' },
       ],
     },
     support: {
@@ -149,15 +167,18 @@ export const COPY: Record<Lang, Copy> = {
         { img: 'assets/otter.png', name: 'ラッコ', desc: 'おとなしくてかわいいラッコ。世界で一番、貝殻が好きです。' },
       ],
     },
-    features: {
-      title: '主な機能',
-      items: [
-        { icon: '✨', title: 'いきいきとした動き', desc: '歩く、走る、跳ねる、ウィンドウを登る、ボールを追いかける。' },
-        { icon: '🧶', title: '一緒に遊ぶ', desc: 'ドラッグして動かすと反応し、クリックするとかわいいリアクション。' },
-        { icon: '🎀', title: 'アイテム & きせかえ', desc: 'エサをあげたりアイテムを持たせて、自分だけのペットに。' },
-        { icon: '⚙️', title: '自由に設定', desc: 'メニューバーのアイコンからサイズ（60〜120%）や表示を調整。' },
-        { icon: '🔒', title: '完全なプライバシー', desc: 'すべて端末内で動作。収集・送信するデータはありません。' },
-        { icon: '🪶', title: '軽くて自然', desc: '作業のじゃまをせず、デスクトップの上で自然に一緒に過ごします。' },
+    showcase: {
+      title: 'Macにそっと寄り添う小さな友だち',
+      sub: 'pokoPetはMacの上を歩き回る小さな友だちです。Macで過ごす時間を、少しあたたかく穏やかにしてくれます。',
+    },
+    usage: {
+      title: '使い方',
+      sub: 'pokoPetのクイックツアー',
+      steps: [
+        { title: 'ほしいペットを選ぶ', desc: 'それぞれのペットには違う動きや癖があります。メニューから選ぶと、作業中の画面のそばに自然に現れます。しまいたいときは、選択中のペットをもう一度クリックしてください。' },
+        { title: 'ウィンドウの上を歩かせる', desc: '画面に表示されているウィンドウのうち、一番手前のものとふれあえます。ペットはウィンドウの上端を地面のように認識して、その上を歩きます。' },
+        { title: 'ウィンドウの上に座らせる', desc: 'ペットをダブルクリックすると、その場に座らせられます。一度座ったペットは、もう一度ドラッグやクリックをするまで、ウィンドウの上にじっと固定されたままになります。' },
+        { title: 'アイテムを置いて反応を見る', desc: 'ステータスバーメニューから小さなアイテムを出せます。ペットは追いかけたり、蹴ったり、眺めたり、ときには手に持って歩くこともあります。' },
       ],
     },
     support: {

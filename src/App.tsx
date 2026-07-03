@@ -1,7 +1,7 @@
 import { useLang } from './LangProvider';
 import LangToggle from './components/LangToggle';
 import Hero from './components/Hero';
-import { Intro, Features, Support, Privacy, Footer } from './components/Sections';
+import { Intro, Showcase, Usage, Support, Privacy, Footer } from './components/Sections';
 
 export default function App() {
   const { lang } = useLang();
@@ -12,7 +12,8 @@ export default function App() {
       <div className="wrap" key={lang}>
         <Hero />
         <Intro />
-        <Features />
+        <Showcase />
+        <Usage />
         <Support />
         <Privacy />
         <Footer />
