@@ -19,7 +19,7 @@ export function Intro() {
       <p className="lead">{intro.lead}</p>
       <div className="pets">
         {intro.pets.map((pet) => (
-          <div className="pet" key={pet.name}>
+          <div className="pet" key={pet.img}>
             <img className="pet-img" src={asset(pet.img)} alt={pet.name} />
             <div className="pet-txt">
               <span className="name">{pet.name}</span>
@@ -60,7 +60,7 @@ export function Usage() {
         {usage.steps.map((step, i) => {
           const clip = USAGE_CLIPS[i];
           return (
-            <div className="step" key={step.title}>
+            <div className="step" key={clip.video}>
               <div className="clip">
                 <AutoVideo src={clip.video} poster={clip.poster} alt={step.title} className="clip-vid" />
               </div>

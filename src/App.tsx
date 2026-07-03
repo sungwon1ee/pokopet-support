@@ -1,15 +1,14 @@
-import { useLang } from './LangProvider';
 import LangToggle from './components/LangToggle';
 import Hero from './components/Hero';
 import { Intro, Showcase, Usage, Support, Privacy, Footer } from './components/Sections';
 
 export default function App() {
-  const { lang } = useLang();
   return (
     <>
       <LangToggle />
-      {/* keyed by lang so the whole page re-runs its fade-in on each switch */}
-      <div className="wrap" key={lang}>
+      {/* No key on lang: switching language should only swap text, not remount
+          the page (which would reload every video). */}
+      <div className="wrap">
         <Hero />
         <Intro />
         <Showcase />
