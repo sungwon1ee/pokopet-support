@@ -1,46 +1,30 @@
 import { useEffect, useRef } from 'react';
 import { asset } from '../i18n';
 
-const reduceMotion = () =>
-  typeof window !== 'undefined' &&
-  window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-
 /*
- * iOS autoplay is allowed for muted+inline video EXCEPT in Low Power Mode or
- * when Safari's per-site setting is "Never Auto-Play" — there, muted autoplay
- * is refused until the first user gesture. But a single gesture *anywhere*
- * unlocks playback for the whole page. So we keep a shared registry of clips
- * and, on the first touch/tap/scroll, kick off every one that's on screen —
- * no per-video play button required.
+ * Native muted autoplay: the `autoplay muted playsinline` attributes make the
+ * clip start on its own on desktop and default iOS Safari — no scrolling, no
+ * tap. The only case the browser still refuses is iOS Low Power Mode, which
+ * blocks all autoplay; for that we keep an invisible safety net that starts
+ * every clip on the visitor's first touch/tap anywhere on the page.
  */
 const clips = new Set<HTMLVideoElement>();
 let armed = false;
-
 const GESTURES = ['touchstart', 'pointerdown', 'click', 'keydown'];
-
-function playIfVisible(v: HTMLVideoElement) {
-  const r = v.getBoundingClientRect();
-  if (r.bottom > 0 && r.top < (window.innerHeight || document.documentElement.clientHeight)) {
-    v.muted = true;
-    v.play().catch(() => {});
-  }
-}
 
 function armFirstGesture() {
   if (armed || typeof window === 'undefined') return;
   armed = true;
   const fire = () => {
-    clips.forEach(playIfVisible);
+    clips.forEach((v) => {
+      v.muted = true;
+      v.play().catch(() => {});
+    });
     GESTURES.forEach((e) => window.removeEventListener(e, fire));
   };
   GESTURES.forEach((e) => window.addEventListener(e, fire, { passive: true }));
 }
 
-/**
- * Muted, looping clip that plays while on screen. Tries to autoplay right away
- * (works on desktop and default mobile Safari); if the browser blocks it, the
- * visitor's first interaction with the page starts it — see the note above.
- */
 export function AutoVideo({
   src,
   poster,
@@ -57,27 +41,11 @@ export function AutoVideo({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    el.muted = true; // iOS checks the muted *property*, not just the attribute
-    if (reduceMotion()) return;
-
+    el.muted = true; // iOS checks the muted *property*, which React doesn't always set
     clips.add(el);
     armFirstGesture();
-
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          el.muted = true;
-          el.preload = 'auto';
-          el.play().catch(() => {});
-        } else {
-          el.pause();
-        }
-      },
-      { threshold: 0.25 },
-    );
-    io.observe(el);
+    el.play().catch(() => {}); // nudge, in case the attribute alone didn't start it
     return () => {
-      io.disconnect();
       clips.delete(el);
     };
   }, []);
@@ -88,10 +56,11 @@ export function AutoVideo({
       className={className}
       poster={asset(poster)}
       src={asset(src)}
+      autoPlay
       muted
       loop
       playsInline
-      preload="none"
+      preload="auto"
       aria-label={alt}
     />
   );
