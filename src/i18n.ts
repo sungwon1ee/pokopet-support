@@ -72,7 +72,7 @@ export const COPY: Record<Lang, Copy> = {
       ],
     },
     support: {
-      title: '지원 (Support)',
+      title: '지원',
       intro: 'pokoPet 사용 중 문제가 생겼거나 궁금한 점, 건의사항이 있으면 이메일로 편하게 연락 주세요. 보통 2~3일 안에 답장드립니다.',
       faqTitle: '자주 묻는 질문',
       faqs: [
@@ -182,7 +182,7 @@ export const COPY: Record<Lang, Copy> = {
       ],
     },
     support: {
-      title: 'サポート (Support)',
+      title: 'サポート',
       intro: 'pokoPetの使用中に問題が起きたり、ご質問・ご要望があれば、お気軽にメールでご連絡ください。通常2〜3日以内に返信します。',
       faqTitle: 'よくある質問',
       faqs: [

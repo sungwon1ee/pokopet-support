@@ -5,15 +5,17 @@
   --accent: #0b6bd6;          /* macOS system blue, darkened — matches panel accent */
   --accent-ink: #0a5fbf;
   --accent-soft: rgba(11, 107, 214, 0.12);
-  --hairline: rgba(0, 0, 0, 0.08);
-  /* Glass (echoes .thickMaterial + white 0.3 overlay + white 0.16 stroke) */
-  --glass: rgba(255, 255, 255, 0.55);
-  --glass-2: rgba(255, 255, 255, 0.44);
-  --glass-brd: rgba(255, 255, 255, 0.60);
+  --hairline: rgba(0, 0, 0, 0.06);
+  /* Translucent glass — thick material with a bright specular top edge */
+  --glass: rgba(255, 255, 255, 0.52);
+  --glass-2: rgba(255, 255, 255, 0.40);
+  --glass-brd: rgba(255, 255, 255, 0.70);
+  /* Layered shadows: contact + ambient + soft cast — reads more premium than one blur */
+  --edge: inset 0 1px 0 rgba(255, 255, 255, 0.72), inset 0 0 0 0.5px rgba(255, 255, 255, 0.28);
   --r: 24px;
   --r-tile: 16px;
-  --shadow: 0 22px 60px rgba(28, 40, 82, 0.16);
-  --shadow-sm: 0 8px 22px rgba(28, 40, 82, 0.10);
+  --shadow: 0 1px 1.5px rgba(28, 40, 82, 0.05), 0 10px 24px rgba(28, 40, 82, 0.08), 0 30px 64px rgba(28, 40, 82, 0.10);
+  --shadow-sm: 0 1px 1px rgba(28, 40, 82, 0.04), 0 6px 16px rgba(28, 40, 82, 0.08);
 }
 * { box-sizing: border-box; }
 html, body { min-height: 100%; }
@@ -25,13 +27,14 @@ body {
   color: var(--fg);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
-  /* bright, colorful "desktop wallpaper" so the glass has something to blur */
+  text-rendering: optimizeLegibility;
+  /* soft, airy "desktop wallpaper" — gives the glass something luminous to blur */
   background:
-    radial-gradient(52vw 52vw at 8% -6%, #cfe0ff 0%, rgba(207,224,255,0) 60%),
-    radial-gradient(48vw 48vw at 102% 4%, #ffd7ea 0%, rgba(255,215,234,0) 58%),
-    radial-gradient(60vw 55vw at 88% 96%, #d6f3ea 0%, rgba(214,243,234,0) 58%),
-    radial-gradient(60vw 60vw at 6% 108%, #e6dcff 0%, rgba(230,220,255,0) 58%),
-    linear-gradient(180deg, #eef2fb 0%, #eaf0f8 100%);
+    radial-gradient(46vw 46vw at 12% -8%, rgba(198, 218, 255, 0.75) 0%, rgba(198,218,255,0) 60%),
+    radial-gradient(42vw 42vw at 100% 4%, rgba(255, 220, 238, 0.62) 0%, rgba(255,220,238,0) 58%),
+    radial-gradient(56vw 52vw at 90% 100%, rgba(206, 244, 235, 0.62) 0%, rgba(206,244,235,0) 58%),
+    radial-gradient(54vw 54vw at 2% 106%, rgba(226, 219, 252, 0.6) 0%, rgba(226,219,252,0) 58%),
+    linear-gradient(180deg, #f1f4fb 0%, #e9eef7 100%);
   background-attachment: fixed;
 }
 .wrap {
@@ -65,12 +68,12 @@ header { text-align: center; margin-bottom: 30px; }
 .appstore-btn {
   display: inline-flex; align-items: center; gap: 11px;
   padding: 12px 22px 12px 18px; border-radius: 15px;
-  background: #1b1620; color: #fff; text-decoration: none;
+  background: linear-gradient(180deg, #2a2430 0%, #1b1620 100%); color: #fff; text-decoration: none;
   font-weight: 700; letter-spacing: -0.01em;
-  box-shadow: 0 12px 26px rgba(27, 22, 32, .28);
-  transition: transform .15s ease, box-shadow .15s ease;
+  box-shadow: 0 10px 24px rgba(27, 22, 32, .26), inset 0 1px 0 rgba(255,255,255,.14);
+  transition: transform .2s cubic-bezier(0.22,0.61,0.36,1), box-shadow .2s ease;
 }
-.appstore-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(27, 22, 32, .34); }
+.appstore-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(27, 22, 32, .32), inset 0 1px 0 rgba(255,255,255,.16); }
 .appstore-btn svg { width: 24px; height: 24px; fill: currentColor; flex: none; }
 .appstore-btn .lbl { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; }
 .appstore-btn .lbl small { font-size: 11px; font-weight: 600; opacity: .82; }
@@ -88,10 +91,10 @@ header { text-align: center; margin-bottom: 30px; }
 .lang {
   position: fixed; top: 16px; right: 16px; z-index: 30;
   display: inline-flex; gap: 4px;
-  background: var(--glass); border: 0.7px solid var(--glass-brd);
-  border-radius: 999px; padding: 4px; box-shadow: var(--shadow);
-  -webkit-backdrop-filter: blur(24px) saturate(150%);
-  backdrop-filter: blur(24px) saturate(150%);
+  background: var(--glass); border: 0.5px solid var(--glass-brd);
+  border-radius: 999px; padding: 4px; box-shadow: var(--shadow-sm), var(--edge);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  backdrop-filter: blur(28px) saturate(180%);
 }
 .lang button {
   border: 0; background: transparent; color: var(--muted);
@@ -99,19 +102,22 @@ header { text-align: center; margin-bottom: 30px; }
   font-size: 14px; font-weight: 700; transition: all .15s ease;
   font-family: inherit;
 }
-.lang button.active { background: var(--accent); color: #fff; box-shadow: 0 4px 12px rgba(11,107,214,.3); }
+.lang button.active {
+  background: linear-gradient(180deg, #2a86ec 0%, var(--accent) 100%); color: #fff;
+  box-shadow: 0 4px 12px rgba(11,107,214,.3), inset 0 1px 0 rgba(255,255,255,.3);
+}
 
 /* ---------- Glass cards ---------- */
 .card {
   position: relative;
   background: var(--glass);
-  border: 0.7px solid var(--glass-brd);
+  border: 0.5px solid var(--glass-brd);
   border-radius: var(--r);
-  padding: 30px 28px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  -webkit-backdrop-filter: blur(30px) saturate(165%);
-  backdrop-filter: blur(30px) saturate(165%);
+  padding: 32px 30px;
+  margin-bottom: 22px;
+  box-shadow: var(--shadow), var(--edge);
+  -webkit-backdrop-filter: blur(36px) saturate(180%);
+  backdrop-filter: blur(36px) saturate(180%);
 }
 h2 { margin: 0 0 8px; font-size: 23px; font-weight: 700; letter-spacing: -0.02em; }
 .lead { color: var(--muted); margin: 0 0 22px; font-size: 16px; }
@@ -136,22 +142,26 @@ strong { font-weight: 600; }
   display: inline-flex; align-items: center; gap: 8px; margin-top: 8px;
   padding: 11px 18px; border-radius: 13px; text-decoration: none;
   background: var(--accent-soft); color: var(--accent-ink);
-  font-size: 16px; font-weight: 800; transition: transform .15s ease;
+  font-size: 15.5px; font-weight: 700; letter-spacing: -0.01em;
+  border: 0.5px solid rgba(11,107,214,.14);
+  transition: transform .2s cubic-bezier(0.22,0.61,0.36,1), background .2s ease;
 }
-.email:hover { transform: translateY(-1px); }
+.email:hover { transform: translateY(-1px); background: rgba(11,107,214,.16); }
 
 /* Meet the pets — glass tiles with real character art */
 .pets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 4px 0; }
 .pet {
   text-align: center; padding: 18px 14px 20px; border-radius: 18px;
   background: var(--glass-2); border: 0.5px solid var(--glass-brd);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+  box-shadow: var(--shadow-sm), var(--edge);
+  transition: transform .25s cubic-bezier(0.22,0.61,0.36,1), box-shadow .25s ease;
 }
+.pet:hover { transform: translateY(-2px); box-shadow: var(--shadow), var(--edge); }
 .pet-img {
   width: 84px; height: 84px; border-radius: 20px; object-fit: cover; display: block; margin: 0 auto;
   box-shadow: 0 8px 18px rgba(40,60,110,.16), inset 0 0 0 0.5px rgba(255,255,255,.5);
 }
-.pet .name { display: block; margin-top: 12px; font-weight: 800; font-size: 15.5px; }
+.pet .name { display: block; margin-top: 12px; font-weight: 700; font-size: 15.5px; letter-spacing: -0.01em; }
 .pet .desc { display: block; margin-top: 5px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
 
 /* ---------- Showcase: page-1 "intro" clip (all three pets together) ---------- */
@@ -160,7 +170,7 @@ strong { font-weight: 600; }
   margin-top: 8px; border-radius: var(--r-tile); overflow: hidden;
   aspect-ratio: 16 / 10; background: #cfe0ff;
   border: 0.5px solid var(--glass-brd);
-  box-shadow: var(--shadow-sm), inset 0 0 0 0.5px rgba(255,255,255,.5);
+  box-shadow: var(--shadow-sm), inset 0 0 0 0.5px rgba(255,255,255,.45);
 }
 
 
@@ -173,7 +183,7 @@ strong { font-weight: 600; }
   position: relative; border-radius: var(--r-tile); overflow: hidden;
   aspect-ratio: 16 / 10; background: #cfe0ff;
   border: 0.5px solid var(--glass-brd);
-  box-shadow: var(--shadow-sm), inset 0 0 0 0.5px rgba(255,255,255,.5);
+  box-shadow: var(--shadow-sm), inset 0 0 0 0.5px rgba(255,255,255,.45);
 }
 /* Anchor to the bottom so the pets (which stand at the base of each clip) are
    never cut off — any cover-cropping happens at the top instead of the middle. */
@@ -181,8 +191,10 @@ strong { font-weight: 600; }
 .step-txt { position: relative; }
 .step-no {
   display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 999px;
-  background: var(--accent); color: #fff; font-size: 13px; font-weight: 800;
-  box-shadow: 0 4px 12px rgba(11,107,214,.3); margin-bottom: 8px;
+  background: linear-gradient(180deg, #2a86ec 0%, var(--accent) 100%); color: #fff;
+  font-size: 13px; font-weight: 700;
+  box-shadow: 0 4px 12px rgba(11,107,214,.32), inset 0 1px 0 rgba(255,255,255,.3);
+  margin-bottom: 8px;
 }
 .step-txt h4 { margin: 0 0 4px; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
 .step-txt p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
