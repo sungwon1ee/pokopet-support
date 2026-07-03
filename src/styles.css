@@ -130,7 +130,9 @@ header { text-align: center; margin-bottom: 30px; }
 }
 h2 { margin: 0 0 8px; font-size: 23px; font-weight: 700; letter-spacing: -0.02em; }
 .lead { color: var(--muted); margin: 0 0 22px; font-size: 16px; }
-h3 { margin: 24px 0 7px; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+/* Section subtitle — sits tight under its heading so it reads as a subtitle */
+.sub { color: var(--muted); margin: -3px 0 18px; font-size: 15px; line-height: 1.45; }
+h3 { margin: 24px 0 7px; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
 p { margin: 0 0 12px; }
 a { color: var(--accent-ink); }
 ul { margin: 0 0 12px; padding-left: 20px; }

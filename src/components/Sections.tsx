@@ -38,7 +38,7 @@ export function Usage() {
   return (
     <Card>
       <h2>{usage.title}</h2>
-      <p className="lead">{usage.sub}</p>
+      <p className="sub">{usage.sub}</p>
       <div className="steps">
         {usage.steps.map((step, i) => {
           const clip = USAGE_CLIPS[i];
