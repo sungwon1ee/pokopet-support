@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useCopy } from '../LangProvider';
-import { asset, EMAIL, USAGE_CLIPS } from '../i18n';
+import { asset, EMAIL, USAGE_CLIPS, SHOTS } from '../i18n';
 import { AutoVideo } from './Media';
 import Rich from './Rich';
 import Paw from './Paw';
@@ -32,6 +32,22 @@ export function Intro() {
   );
 }
 
+export function Gallery() {
+  const { gallery } = useCopy();
+  return (
+    <Card>
+      <h2>{gallery.title}</h2>
+      <p className="sub">{gallery.sub}</p>
+      <div className="shots">
+        {SHOTS.map((src, i) => (
+          <figure className={`shot${i === 0 ? ' feat' : ''}`} key={src}>
+            <img src={asset(src)} alt={gallery.alts[i]} loading="lazy" />
+          </figure>
+        ))}
+      </div>
+    </Card>
+  );
+}
 
 export function Usage() {
   const { usage } = useCopy();

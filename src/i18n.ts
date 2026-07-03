@@ -27,10 +27,14 @@ export const USAGE_CLIPS = [
   { video: 'assets/video/use-items.mp4', poster: 'assets/poster/use-items.jpg' },
 ];
 
+/** App Store screenshots — the first is shown large/featured. */
+export const SHOTS = ['assets/shot/1.jpg', 'assets/shot/3.jpg', 'assets/shot/2.jpg'];
+
 export interface Copy {
   tagline: string;
   appStore: { small: string; soon: string; download: string };
   intro: { title: string; lead: string; pets: Pet[] };
+  gallery: { title: string; sub: string; alts: string[] };
   usage: { title: string; sub: string; steps: UsageStep[] };
   support: { title: string; intro: string; faqTitle: string; faqs: Faq[] };
   privacy: { title: string; updated: string; intro: string; blocks: PrivacyBlock[] };
@@ -52,6 +56,11 @@ export const COPY: Record<Lang, Copy> = {
         { img: 'assets/lizard.png', name: '도마뱀', desc: '무슨 생각을 하는지 알 수 없는 도마뱀. 유일하게 벽을 타고 다녀요.' },
         { img: 'assets/otter.png', name: '해달', desc: '온순하고 귀여운 해달. 세상에서 조개껍데기를 가장 좋아해요.' },
       ],
+    },
+    gallery: {
+      title: '화면 위에서 함께',
+      sub: '앱 위를 오가고, 놀고, 쉬면서 하루를 함께 보내요.',
+      alts: ['계산기 위에서 노는 도마뱀과 해달', '공을 가지고 노는 고양이', '창 위로 뛰어오르는 도마뱀과 조개를 든 해달'],
     },
     usage: {
       title: '이렇게 사용해요',
@@ -104,6 +113,11 @@ export const COPY: Record<Lang, Copy> = {
         { img: 'assets/otter.png', name: 'Sea Otter', desc: 'A gentle, adorable sea otter that loves sea shells most of all.' },
       ],
     },
+    gallery: {
+      title: 'Right on your desktop',
+      sub: 'Playing, resting, and hanging out across your apps all day.',
+      alts: ['Lizard and otter on the Calculator', 'Cat playing with a ball', 'Lizard leaping while the otter holds a shell'],
+    },
     usage: {
       title: 'How to use',
       sub: 'A quick tour of pokoPet',
@@ -154,6 +168,11 @@ export const COPY: Record<Lang, Copy> = {
         { img: 'assets/lizard.png', name: 'トカゲ', desc: '何を考えているのか分からないトカゲ。唯一、壁を登れます。' },
         { img: 'assets/otter.png', name: 'ラッコ', desc: 'おとなしくてかわいいラッコ。世界で一番、貝殻が好きです。' },
       ],
+    },
+    gallery: {
+      title: '画面の上で一緒に',
+      sub: 'アプリの上を歩いたり、遊んだり、休んだり。一日中そばに。',
+      alts: ['電卓の上のトカゲとラッコ', 'ボールで遊ぶネコ', '飛び跳ねるトカゲと貝殻を持つラッコ'],
     },
     usage: {
       title: '使い方',

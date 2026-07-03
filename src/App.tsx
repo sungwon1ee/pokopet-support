@@ -1,6 +1,6 @@
 import LangToggle from './components/LangToggle';
 import Hero from './components/Hero';
-import { Intro, Usage, Support, Privacy, Footer } from './components/Sections';
+import { Intro, Gallery, Usage, Support, Privacy, Footer } from './components/Sections';
 
 export default function App() {
   return (
@@ -11,6 +11,7 @@ export default function App() {
       <div className="wrap">
         <Hero />
         <Intro />
+        <Gallery />
         <Usage />
         <Support />
         <Privacy />
