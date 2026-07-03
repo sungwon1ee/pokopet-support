@@ -89,13 +89,14 @@ export function Support() {
         ✉️ {EMAIL}
       </a>
       <h3>{support.faqTitle}</h3>
-      <ul>
+      <div className="faqs">
         {support.faqs.map((f, i) => (
-          <li key={i}>
-            <strong>{f.q}</strong> {f.a}
-          </li>
+          <div className="faq" key={i}>
+            <p className="q">{f.q}</p>
+            <p className="a">{f.a}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </Card>
   );
 }
