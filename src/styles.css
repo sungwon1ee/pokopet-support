@@ -192,11 +192,11 @@ footer a { color: var(--muted); }
   .lang { top: 10px; right: 10px; }
   .lang button { padding: 6px 12px; font-size: 13px; }
 
-  /* Walkthrough stacks: clip on top, text below */
+  /* Walkthrough stacks: clip on top, text below; number sits before the title */
   .step, .step:nth-child(even) { grid-template-columns: 1fr; gap: 12px; }
   .step:nth-child(even) .clip { order: 0; }
-  .step-no { position: absolute; top: 0; right: 0; margin: 0; }
-  .step-txt { padding-right: 34px; }
+  .step-head { display: flex; align-items: center; gap: 10px; }
+  .step-no { margin-bottom: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

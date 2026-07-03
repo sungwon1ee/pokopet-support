@@ -65,8 +65,10 @@ export function Usage() {
                 <AutoVideo src={clip.video} poster={clip.poster} alt={step.title} className="clip-vid" />
               </div>
               <div className="step-txt">
-                <span className="step-no">{i + 1}</span>
-                <h4>{step.title}</h4>
+                <div className="step-head">
+                  <span className="step-no">{i + 1}</span>
+                  <h4>{step.title}</h4>
+                </div>
                 <p>{step.desc}</p>
               </div>
             </div>
