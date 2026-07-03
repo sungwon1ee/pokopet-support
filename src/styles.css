@@ -6,10 +6,10 @@
   --accent-ink: #0a5fbf;
   --accent-soft: rgba(11, 107, 214, 0.12);
   --hairline: rgba(0, 0, 0, 0.06);
-  /* Translucent glass — thin enough that the candy background tints through */
-  --glass: rgba(255, 255, 255, 0.42);
-  --glass-2: rgba(255, 255, 255, 0.32);
-  --glass-brd: rgba(255, 255, 255, 0.70);
+  /* Very translucent glass — mostly the blurred background shows through */
+  --glass: rgba(255, 255, 255, 0.28);
+  --glass-2: rgba(255, 255, 255, 0.20);
+  --glass-brd: rgba(255, 255, 255, 0.65);
   /* Layered shadows: contact + ambient + soft cast — reads more premium than one blur */
   --edge: inset 0 1px 0 rgba(255, 255, 255, 0.72), inset 0 0 0 0.5px rgba(255, 255, 255, 0.28);
   --r: 24px;
@@ -28,18 +28,17 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  /* colorful "desktop wallpaper" — vivid candy blobs the frosted glass picks up */
+  /* soft candy blobs — gentle pastels the frosted glass picks up */
   background:
-    radial-gradient(42vw 40vw at 16% -4%, rgba(150, 186, 255, 0.92) 0%, rgba(150,186,255,0) 60%),
-    radial-gradient(40vw 40vw at 102% 6%, rgba(255, 176, 214, 0.88) 0%, rgba(255,176,214,0) 60%),
-    radial-gradient(46vw 46vw at 96% 100%, rgba(150, 232, 210, 0.85) 0%, rgba(150,232,210,0) 60%),
-    radial-gradient(46vw 50vw at -4% 104%, rgba(197, 178, 255, 0.88) 0%, rgba(197,178,255,0) 60%),
-    radial-gradient(34vw 30vw at 60% 42%, rgba(255, 224, 178, 0.55) 0%, rgba(255,224,178,0) 55%),
-    linear-gradient(180deg, #eef2fc 0%, #e7edf8 100%);
+    radial-gradient(44vw 42vw at 16% -6%, rgba(196, 214, 255, 0.55) 0%, rgba(196,214,255,0) 62%),
+    radial-gradient(42vw 42vw at 104% 4%, rgba(255, 208, 228, 0.5) 0%, rgba(255,208,228,0) 60%),
+    radial-gradient(48vw 48vw at 98% 102%, rgba(198, 236, 223, 0.5) 0%, rgba(198,236,223,0) 60%),
+    radial-gradient(48vw 52vw at -6% 104%, rgba(219, 208, 255, 0.5) 0%, rgba(219,208,255,0) 60%),
+    linear-gradient(180deg, #f0f3fb 0%, #eaeff8 100%);
   background-attachment: fixed;
 }
 .wrap {
-  max-width: 600px; margin: 0 auto; padding: 44px 20px 76px;
+  max-width: 760px; margin: 0 auto; padding: 44px 20px 76px;
   animation: pageIn 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 @keyframes pageIn {
@@ -47,10 +46,14 @@ body {
   to   { opacity: 1; transform: none; }
 }
 
-/* ---------- Header / Hero ---------- */
-header { text-align: center; margin-bottom: 30px; }
+/* ---------- Header / Hero (two columns on desktop) ---------- */
+.hero {
+  display: flex; align-items: center; gap: 34px;
+  text-align: left; margin-bottom: 34px;
+}
+.hero-lead { flex: 1 1 0; min-width: 0; }
 .mark {
-  width: 96px; height: 96px; margin: 0 auto 18px;
+  width: 92px; height: 92px; margin: 0 0 16px;
   /* icon PNG is already a rounded squircle — drop-shadow hugs its shape */
   filter: drop-shadow(0 16px 26px rgba(40, 60, 110, 0.28));
   animation: bob 4.2s ease-in-out infinite;
@@ -177,7 +180,7 @@ strong { font-weight: 600; }
 /* ---------- Hero showcase clip (all three pets together) ---------- */
 .hero-clip {
   position: relative;
-  margin: 28px auto 0; overflow: hidden; width: 100%;
+  flex: 1.15 1 0; margin: 0; overflow: hidden;
   border-radius: var(--r); aspect-ratio: 16 / 10; background: #cfe0ff;
   border: 0.5px solid var(--glass-brd);
   box-shadow: var(--shadow), var(--edge);
@@ -213,6 +216,11 @@ footer a { color: var(--muted); }
 
 @media (max-width: 560px) {
   .card { padding: 24px 18px; }
+  /* Hero stacks and re-centers on mobile */
+  .hero { flex-direction: column; text-align: center; gap: 0; margin-bottom: 26px; }
+  .hero-lead { flex: none; width: 100%; }
+  .mark { margin: 0 auto 18px; }
+  .hero-clip { flex: none; width: 100%; margin-top: 22px; }
   .pets { grid-template-columns: 1fr; }
   .pet { display: flex; align-items: center; gap: 16px; text-align: left; }
   .pet-img { flex: none; margin: 0; }

@@ -6,17 +6,19 @@ import { AutoVideo } from './Media';
 export default function Hero() {
   const { tagline } = useCopy();
   return (
-    <header>
-      <div className="mark">
-        <img src={asset('assets/icon-rounded.png')} alt="pokoPet" />
-      </div>
-      <h1 className="logo">
-        poko<span>Pet</span>
-      </h1>
-      <p className="tagline">{tagline}</p>
+    <header className="hero">
+      <div className="hero-lead">
+        <div className="mark">
+          <img src={asset('assets/icon-rounded.png')} alt="pokoPet" />
+        </div>
+        <h1 className="logo">
+          poko<span>Pet</span>
+        </h1>
+        <p className="tagline">{tagline}</p>
 
-      <div className="cta">
-        <AppStoreButton />
+        <div className="cta">
+          <AppStoreButton />
+        </div>
       </div>
 
       {/* All three pets together — the hero showcase clip */}
