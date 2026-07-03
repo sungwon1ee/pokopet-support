@@ -90,21 +90,22 @@ header { text-align: center; margin-bottom: 30px; }
 /* Language toggle — fixed in the top-right corner (glass capsule, accent-fill active) */
 .lang {
   position: fixed; top: 16px; right: 16px; z-index: 30;
-  display: inline-flex; gap: 4px;
+  /* equal-width segments so the sliding thumb never changes size */
+  display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr;
   background: var(--glass); border: 0.5px solid var(--glass-brd);
   border-radius: 999px; padding: 4px; box-shadow: var(--shadow-sm), var(--edge);
   -webkit-backdrop-filter: blur(28px) saturate(180%);
   backdrop-filter: blur(28px) saturate(180%);
 }
-/* Sliding indicator that glides to the selected language */
+/* Sliding indicator — a light "thumb" that glides to the selected language.
+   Light thumb + dark text stays readable even while it sweeps over a label. */
 .lang-thumb {
   position: absolute; top: 4px; bottom: 4px; left: 0;
   border-radius: 999px;
-  background: linear-gradient(180deg, #2a86ec 0%, var(--accent) 100%);
-  box-shadow: 0 4px 12px rgba(11,107,214,.3), inset 0 1px 0 rgba(255,255,255,.3);
-  transition: transform .34s cubic-bezier(0.22,0.61,0.36,1),
-              width .34s cubic-bezier(0.22,0.61,0.36,1), opacity .2s ease;
-  pointer-events: none; will-change: transform, width;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(28,40,82,.14), 0 1px 2px rgba(28,40,82,.10);
+  transition: transform .34s cubic-bezier(0.22,0.61,0.36,1), opacity .2s ease;
+  pointer-events: none; will-change: transform;
 }
 .lang button {
   position: relative; z-index: 1;
@@ -113,7 +114,7 @@ header { text-align: center; margin-bottom: 30px; }
   font-size: 14px; font-weight: 700; transition: color .28s ease;
   font-family: inherit;
 }
-.lang button.active { color: #fff; }
+.lang button.active { color: var(--accent-ink); }
 
 /* ---------- Glass cards ---------- */
 .card {
@@ -170,13 +171,13 @@ strong { font-weight: 600; }
 .pet .name { display: block; margin-top: 12px; font-weight: 700; font-size: 15.5px; letter-spacing: -0.01em; }
 .pet .desc { display: block; margin-top: 5px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
 
-/* ---------- Showcase: page-1 "intro" clip (all three pets together) ---------- */
-.showcase-clip {
+/* ---------- Hero showcase clip (all three pets together) ---------- */
+.hero-clip {
   position: relative;
-  margin-top: 8px; border-radius: var(--r-tile); overflow: hidden;
-  aspect-ratio: 16 / 10; background: #cfe0ff;
+  margin: 30px auto 0; overflow: hidden;
+  border-radius: var(--r); aspect-ratio: 16 / 10; background: #cfe0ff;
   border: 0.5px solid var(--glass-brd);
-  box-shadow: var(--shadow-sm), inset 0 0 0 0.5px rgba(255,255,255,.45);
+  box-shadow: var(--shadow), var(--edge);
 }
 
 

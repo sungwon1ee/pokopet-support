@@ -1,6 +1,7 @@
 import { useCopy } from '../LangProvider';
-import { asset } from '../i18n';
+import { asset, INTRO_CLIP } from '../i18n';
 import AppStoreButton from './AppStoreButton';
+import { AutoVideo } from './Media';
 
 export default function Hero() {
   const { tagline } = useCopy();
@@ -16,6 +17,11 @@ export default function Hero() {
 
       <div className="cta">
         <AppStoreButton />
+      </div>
+
+      {/* All three pets together — the hero showcase clip */}
+      <div className="hero-clip">
+        <AutoVideo src={INTRO_CLIP.video} poster={INTRO_CLIP.poster} alt="pokoPet" className="clip-vid" />
       </div>
     </header>
   );

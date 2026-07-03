@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useCopy } from '../LangProvider';
-import { asset, EMAIL, USAGE_CLIPS, INTRO_CLIP } from '../i18n';
+import { asset, EMAIL, USAGE_CLIPS } from '../i18n';
 import { AutoVideo } from './Media';
 import Rich from './Rich';
 import Paw from './Paw';
@@ -32,23 +32,6 @@ export function Intro() {
   );
 }
 
-export function Showcase() {
-  const { showcase } = useCopy();
-  return (
-    <Card>
-      <h2>{showcase.title}</h2>
-      <p className="lead">{showcase.sub}</p>
-      <div className="showcase-clip">
-        <AutoVideo
-          src={INTRO_CLIP.video}
-          poster={INTRO_CLIP.poster}
-          alt={showcase.title}
-          className="clip-vid"
-        />
-      </div>
-    </Card>
-  );
-}
 
 export function Usage() {
   const { usage } = useCopy();
