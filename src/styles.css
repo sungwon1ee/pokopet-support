@@ -176,8 +176,10 @@ strong { font-weight: 600; }
 /* ---------- Hero showcase clip (all three pets together) ---------- */
 .hero-clip {
   position: relative;
-  margin: 30px auto 0; overflow: hidden;
-  border-radius: var(--r); aspect-ratio: 16 / 10; background: #cfe0ff;
+  margin: 28px auto 0; overflow: hidden;
+  /* cap the width: the source is ~1006px, so a smaller frame stays crisp */
+  max-width: 480px; width: 100%;
+  border-radius: var(--r-tile); aspect-ratio: 16 / 10; background: #cfe0ff;
   border: 0.5px solid var(--glass-brd);
   box-shadow: var(--shadow), var(--edge);
 }
