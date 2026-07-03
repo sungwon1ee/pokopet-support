@@ -28,7 +28,21 @@ export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(detectLang);
 
   useEffect(() => {
+    const c = COPY[lang];
+    const title = `pokoPet — ${c.tagline}`;
     document.documentElement.lang = lang;
+    document.title = title;
+
+    // Localize the meta/OG tags for the browser experience. (Link-preview
+    // crawlers read the static HTML without running JS, so they'll still see
+    // the default-language tags — true per-language previews need SSR.)
+    const setMeta = (selector: string, content: string) => {
+      document.querySelector(selector)?.setAttribute('content', content);
+    };
+    setMeta('meta[name="description"]', c.intro.lead);
+    setMeta('meta[property="og:title"]', title);
+    setMeta('meta[property="og:description"]', c.intro.lead);
+
     try {
       localStorage.setItem(STORAGE_KEY, lang);
     } catch {
