@@ -8,8 +8,15 @@ export const LANGS: { code: Lang; label: string }[] = [
 
 export const EMAIL = 'malang.laboratory@gmail.com';
 
-/** App Store link. Leave empty until published — the button shows "Coming Soon". */
-export const APP_STORE_URL = '';
+/** Mac App Store product ID for pokoPet. */
+const APP_STORE_ID = '6785332026';
+
+/** App Store storefront country code per language, so links land on the matching local store. */
+const APP_STORE_COUNTRY: Record<Lang, string> = { ko: 'kr', en: 'us', ja: 'jp' };
+
+/** Localized Mac App Store link for the given language. */
+export const appStoreUrl = (lang: Lang) =>
+  `https://apps.apple.com/${APP_STORE_COUNTRY[lang]}/app/pokopet/id${APP_STORE_ID}?mt=12`;
 
 /** Prefix a public/ asset path with Vite's base URL so it works from any deploy path. */
 export const asset = (p: string) => import.meta.env.BASE_URL + p;
