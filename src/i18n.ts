@@ -21,7 +21,7 @@ export const appStoreUrl = (lang: Lang) =>
 /** Prefix a public/ asset path with Vite's base URL so it works from any deploy path. */
 export const asset = (p: string) => import.meta.env.BASE_URL + p;
 
-export interface Pet { img: string; name: string; desc: string; }
+export interface Pet { img: string; name: string; desc: string; isNew?: boolean; }
 export interface Faq { q: string; a: string; }
 export interface PrivacyBlock { heading: string; body: string[]; list?: string[]; }
 export interface UsageStep { title: string; desc: string; }
@@ -59,6 +59,7 @@ export const COPY: Record<Lang, Copy> = {
       title: 'pokoPet이란?',
       lead: '화면 위를 돌아다니고, 창을 기어오르고, 당신에게 반응하는 귀여운 macOS 데스크톱 펫이에요. 일하는 동안 곁을 지켜주는 작은 친구를 만나보세요.',
       pets: [
+        { img: 'assets/axolotl.png', name: '우파루파', desc: '물에서 온 분홍빛 우파루파. 흥이 많아서 틈만 나면 춤을 춰요.', isNew: true },
         { img: 'assets/cat.png', name: '고양이', desc: '장난감을 좋아하는 친절한 고양이. 하지만 언제 펀치를 날릴지 몰라요.' },
         { img: 'assets/lizard.png', name: '도마뱀', desc: '무슨 생각을 하는지 알 수 없는 도마뱀. 유일하게 벽을 타고 다녀요.' },
         { img: 'assets/otter.png', name: '해달', desc: '온순하고 귀여운 해달. 세상에서 조개껍데기를 가장 좋아해요.' },
@@ -115,6 +116,7 @@ export const COPY: Record<Lang, Copy> = {
       title: 'What is pokoPet?',
       lead: 'A cute macOS desktop pet that wanders across your screen, climbs your windows, and reacts to you. Meet a little companion that keeps you company while you work.',
       pets: [
+        { img: 'assets/axolotl.png', name: 'Axolotl', desc: 'A rosy little axolotl from the water — so full of rhythm it dances at every chance.', isNew: true },
         { img: 'assets/cat.png', name: 'Cat', desc: 'A friendly cat who loves toys — but you never know when a punch might fly.' },
         { img: 'assets/lizard.png', name: 'Lizard', desc: 'An inscrutable lizard — the only one who can climb your walls.' },
         { img: 'assets/otter.png', name: 'Sea Otter', desc: 'A gentle, adorable sea otter that loves sea shells most of all.' },
@@ -171,6 +173,7 @@ export const COPY: Record<Lang, Copy> = {
       title: 'pokoPetとは？',
       lead: '画面の上を歩き回り、ウィンドウをよじ登り、あなたに反応するかわいいmacOSデスクトップペット。作業のあいだ、そばに寄り添う小さな友だちに出会いましょう。',
       pets: [
+        { img: 'assets/axolotl.png', name: 'ウーパールーパー', desc: '水からやってきたピンクのウーパールーパー。ノリがよくて、すきあらば踊りだします。', isNew: true },
         { img: 'assets/cat.png', name: 'ネコ', desc: 'おもちゃが好きなやさしいネコ。でも、いつパンチが飛んでくるかは分かりません。' },
         { img: 'assets/lizard.png', name: 'トカゲ', desc: '何を考えているのか分からないトカゲ。唯一、壁を登れます。' },
         { img: 'assets/otter.png', name: 'ラッコ', desc: 'おとなしくてかわいいラッコ。世界で一番、貝殻が好きです。' },

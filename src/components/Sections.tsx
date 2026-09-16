@@ -22,7 +22,10 @@ export function Intro() {
           <div className="pet" key={pet.img}>
             <img className="pet-img" src={asset(pet.img)} alt={pet.name} />
             <div className="pet-txt">
-              <span className="name">{pet.name}</span>
+              <span className="name">
+                {pet.name}
+                {pet.isNew && <span className="pet-new">NEW!</span>}
+              </span>
               <span className="desc">{pet.desc}</span>
             </div>
           </div>

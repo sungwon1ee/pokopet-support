@@ -159,19 +159,33 @@ strong { font-weight: 600; }
 }
 .email:hover { transform: translateY(-1px); background: rgba(11,107,214,.16); }
 
-/* Meet the pets — glass tiles with real character art */
-.pets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 4px 0; }
+/* Meet the pets — glass tiles with real character art.
+   Two per row: with four pets, portrait tiles would leave the description
+   column too narrow to read, so each tile runs art-left / text-right. */
+.pets { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 4px 0; }
 .pet {
-  text-align: center; padding: 18px 14px 20px; border-radius: 18px;
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 16px 18px; border-radius: 18px;
   background: var(--glass-2); border: 0.5px solid var(--glass-brd);
   box-shadow: var(--shadow-sm), var(--edge);
 }
 .pet-img {
-  width: 84px; height: 84px; border-radius: 20px; object-fit: cover; display: block; margin: 0 auto;
+  flex: none; width: 84px; height: 84px; border-radius: 20px; object-fit: cover; display: block;
   box-shadow: 0 8px 18px rgba(40,60,110,.16), inset 0 0 0 0.5px rgba(255,255,255,.5);
 }
-.pet .name { display: block; margin-top: 12px; font-weight: 700; font-size: 15.5px; letter-spacing: -0.01em; }
+.pet-txt { min-width: 0; }
+.pet .name {
+  display: flex; align-items: center; gap: 7px;
+  font-weight: 700; font-size: 15.5px; letter-spacing: -0.01em;
+}
 .pet .desc { display: block; margin-top: 5px; color: var(--muted); font-size: 12.5px; line-height: 1.5; }
+/* Freshly added character — warm pink so it reads apart from the blue accent */
+.pet-new {
+  flex: none; padding: 1px 7px; border-radius: 999px;
+  background: rgba(255, 45, 110, 0.14); color: #d81b60;
+  border: 0.5px solid rgba(255, 45, 110, 0.18);
+  font-size: 10.5px; font-weight: 800; letter-spacing: 0.02em; line-height: 1.6;
+}
 
 /* ---------- Screenshot gallery (one featured + two below) ---------- */
 .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 2px; }
@@ -216,10 +230,6 @@ footer a { color: var(--muted); }
   .hero { margin-bottom: 26px; }
   .pets { grid-template-columns: 1fr; }
   .shots { grid-template-columns: 1fr; }
-  .pet { display: flex; align-items: center; gap: 16px; text-align: left; }
-  .pet-img { flex: none; margin: 0; }
-  .pet-txt { min-width: 0; }
-  .pet .name { margin-top: 0; }
   .logo { font-size: 40px; }
   .lang { top: 10px; right: 10px; }
   .lang button { padding: 6px 12px; font-size: 13px; }
